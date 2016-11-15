@@ -2,6 +2,11 @@
 
 **connect-redis** is a Redis session store backed by [node_redis](http://github.com/mranney/node_redis), and is insanely fast :). Requires redis >= `2.0.0` for the *SETEX* command.
 
+Update
+-----
+
+use [hashring](https://github.com/3rd-Eden/node-hashring) to support multiple redis instance.
+
 Setup
 -----
 
@@ -24,10 +29,10 @@ app.use(session({
 Options
 -------
 
-A Redis client is required. An existing client can be passed directly using the `client` param or created for you using the `host`, `port`, or `socket` params. 
+A Redis client is required. An existing client can be passed directly using the `client` param or created for you using the `host`, `port`, or `socket` params.
 
 - `client` An existing client
-- `host` Redis server hostname 
+- `host` Redis server hostname
 - `port` Redis server portno
 - `socket` Redis server unix_socket
 - `url` Redis server url
