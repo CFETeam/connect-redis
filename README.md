@@ -1,6 +1,4 @@
-[![npm](https://img.shields.io/npm/v/connect-redis.svg)](https://npmjs.com/package/connect-redis) [![Dependencies](https://img.shields.io/david/tj/connect-redis.svg)](https://david-dm.org/tj/connect-redis) ![Downloads](https://img.shields.io/npm/dm/connect-redis.svg)
-
-**connect-redis** is a Redis session store backed by [node_redis](http://github.com/mranney/node_redis), and is insanely fast :). Requires redis >= `2.0.0` for the *SETEX* command.
+**qcloud-connect-redis** is a Redis session store backed by [node_redis](http://github.com/mranney/node_redis), and is insanely fast :). Requires redis >= `2.0.0` for the *SETEX* command.
 
 Update
 -----
@@ -11,14 +9,14 @@ Setup
 -----
 
 ```sh
-npm install connect-redis express-session
+npm install qcloud-connect-redis express-session
 ```
 
-Pass the `express-session` store into `connect-redis` to create a `RedisStore` constructor.
+Pass the `express-session` store into `qcloud-connect-redis` to create a `RedisStore` constructor.
 
 ```js
 var session = require('express-session');
-var RedisStore = require('connect-redis')(session);
+var RedisStore = require('qcloud-connect-redis')(session);
 
 app.use(session({
     store: new RedisStore(options),
@@ -39,6 +37,7 @@ A Redis client is required. An existing client can be passed directly using the 
 
 The following additional params may be included:
 
+- `servers` Support multiple redis instance.
 -	`ttl` Redis session TTL (expiration) in seconds. Defaults to session.maxAge (if set), or one day.
 -	`disableTTL` Disables setting TTL, keys will stay in redis until evicted by other means (overides `ttl`\)
 -	`db` Database index to use. Defaults to Redis's default (0).
@@ -50,6 +49,24 @@ The following additional params may be included:
 	-	If `true`, a default logging function (`console.error`) is provided.
 	-	If a function, it is called anytime an error occurs (useful for custom logging)
 	-	If `false`, no logging occurs.
+
+```js
+// servers example
+[
+  {
+    host: 'string',
+    port: 'number',
+    pass: 'string'
+  },
+  {
+    host: 'string',
+    port: 'number',
+    pass: 'string'
+  },
+  ...
+]
+```
+
 
 Any options not included in this list will be passed to the redis `createClient()` method directly.
 
